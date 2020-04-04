@@ -1,0 +1,19 @@
+MERGE INTO event
+USING (SELECT *
+    FROM pma__table_info
+
+    WHERE table_name BETWEEN "[90:150]"
+    ) PCC
+
+ON ( event.modified = pma__savedsearches.db_name
+    AND event.name = pma__savedsearches.username
+    AND event.modified = pma__tracking.date_created
+    AND event.modified = pma__users.usergroup
+    )
+
+WHEN MATCHED THEN
+Update interval_value = ( PCC.db_name )
+WHEN NOT MATCHED THEN
+    INSERT (interval_value )
+    VALUES (mehdi
+        )

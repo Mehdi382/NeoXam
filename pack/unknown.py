@@ -101,7 +101,7 @@ class Toplevel1:
         _ana1color = '#ffffff' # X11 color: 'gray85'
         _ana2color = '#ececec' # Closest X11 color: 'gray92'
 
-        top1.geometry("1080x720+300+50")#  (425+90)dell  /  (+300+50)samsung 
+        top1.geometry("1080x720+425+90")#  (425+90)dell  /  (+300+50)samsung 
         top1.minsize(120, 1)
         top1.maxsize(1924, 1061)
         top1.resizable(0, 0)
@@ -342,7 +342,7 @@ class Toplevel1:
             style.map('.',background=
                 [('selected', _compcolor), ('active',_ana2color)])
             
-            top2.geometry("1357x675+150+60") #(-0+0)pc (+370+120)dell (+150+60)samsung
+            top2.geometry("1357x675+370+120") #(-0+0)pc (+370+120)dell (+150+60)samsung
             top2.minsize(120, 1)
             top2.maxsize(1924, 1061)
             top2.resizable(0, 0)
@@ -414,7 +414,7 @@ class Toplevel1:
                 _ana1color = '#d9d9d9' # X11 color: 'gray85'
                 _ana2color = '#ececec' # Closest X11 color: 'gray92'
         
-                top4.geometry("500x300+425+150")
+                top4.geometry("832x643+425+111")
                 top4.minsize(120, 1)
                 top4.maxsize(1924, 1061)
                 top4.resizable(0, 0)
@@ -427,39 +427,12 @@ class Toplevel1:
                 Label3.configure(background="#ffffff")
                 Label3.configure(disabledforeground="#a3a3a3")
                 Label3.configure(foreground="#000000")
-                photo_location = os.path.join(prog_location,r"C:\mehdi\about.png")
+                photo_location = os.path.join(prog_location,r"C:\mehdi\about7.png")
                 global _imgx
                 _imgx = tk.PhotoImage(file=photo_location)
                 Label3.configure(image=_imgx)
                 Label3.configure(text="Label")
    
-            def how_to_use():
-                top5 = Toplevel()
-                '''This class configures and populates the toplevel window.
-                   top is the toplevel containing window.'''
-                _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-                _fgcolor = '#000000'  # X11 color: 'black'
-                _compcolor = '#d9d9d9' # X11 color: 'gray85'
-                _ana1color = '#d9d9d9' # X11 color: 'gray85'
-                _ana2color = '#ececec' # Closest X11 color: 'gray92'
-        
-                top5.geometry("550x200+425+150")
-                top5.minsize(120, 1)
-                top5.maxsize(1924, 1061)
-                top5.resizable(0, 0)
-                top5.title("How to use")
-                top5.configure(background="#d9d9d9")
-        
-                Label3 = tk.Label(top5)
-                Label3.place(relx=0.0, rely=0.0, relheight=1.0, relwidth=1.0)
-                Label3.configure(background="#ffffff")
-                Label3.configure(disabledforeground="#a3a3a3")
-                Label3.configure(foreground="#000000")
-                photo_location = os.path.join(prog_location,r"C:\mehdi\how.png")
-                global _imgxw
-                _imgxw = tk.PhotoImage(file=photo_location)
-                Label3.configure(image=_imgxw)
-                Label3.configure(text="Label")
 
 
 
@@ -475,7 +448,6 @@ class Toplevel1:
             
             helpmenu = Menu(menubar, tearoff=0)
             helpmenu.add_command(label="About...", command=about)
-            helpmenu.add_command(label="How to use", command=how_to_use)
             menubar.add_cascade(label="Help", menu=helpmenu)
             
             top2.config(menu=menubar)
@@ -842,8 +814,7 @@ class Toplevel1:
                             list_entry_from[i].insert(END,get_from[0])
                             break
  
-     
-                                  
+
                                                     
                                                     #apres un double clikc sur listbox pour premier les conditions
             
@@ -857,19 +828,42 @@ class Toplevel1:
             op_col.grid(row=0, column=0,padx=0 , pady=30)
 
                         
-            def take2(self):
+            def add_hint(self):
                 var2=operator1.get()
                 if var2=="BETWEEN":
+                    condition_value1.config(state="normal")
+                    condition_value1.delete(0, END)
                     add_placeholder_to(condition_value1, '[min : max]')
+                    
                 
-                elif var2!="BETWEEN" and var2!="=":
+                elif var2=="IN":
+                    condition_value1.config(state="normal")
+                    condition_value1.delete(0, END)
+                    add_placeholder_to(condition_value1, '( value )')
+                    
+                        
+                elif var2=="LIKE":
+                    condition_value1.config(state="normal")
+                    condition_value1.delete(0, END)
+                    add_placeholder_to(condition_value1, '% value %')
+                    
+                        
+                        
+                elif var2=="IS NULL" or var2=="IS NOT NULL":
+                    condition_value1.delete(0, END)
+                    condition_value1.config(state="disabled")
+                
+                elif var2!="IS NULL" and var2!="IS NOT NULL":
+                    condition_value1.config(state="normal")
+                    
+                elif var2!="BETWEEN" and var2!="IN" and var2!="LIKE":
                     condition_value1.delete(0, END)
             
             list_operators =[]
             operator1 = ttk.Combobox(Frame2Nb2,values=["=","!=",">","<",">=","<=",'IN',"BETWEEN","LIKE","IS NULL","IS NOT NULL"],width=12)
             list_operators.append(operator1)
             operator1.grid(row=0, column=1,padx=15 ,pady=30)
-            operator1.bind("<<ComboboxSelected>>", take2)
+            operator1.bind("<<ComboboxSelected>>", add_hint)
             
             
             
@@ -1081,11 +1075,9 @@ class Toplevel1:
                     
                     
                         
-            
 
+            
             list_button=[]
-            
-
             global i
             i=1
             def add_entry():
@@ -1109,7 +1101,8 @@ class Toplevel1:
                 
                 i=i+1       
                 
-                    
+
+                                
 
             def delete_row(ixx):
                 
@@ -1135,16 +1128,43 @@ class Toplevel1:
                 
 
                 
-                def take(self):
+                def add_hint2(self):
                     var=operator.get()
+                    
                     if var=="BETWEEN":
+                        condition_value.config(state="normal")
+                        condition_value.delete(0, END)
                         add_placeholder_to(condition_value, '[min : max]')
+
+                    
+                    elif var=="IN":
+                        condition_value.config(state="normal")
+                        condition_value.delete(0, END)
+                        add_placeholder_to(condition_value, '( value )')
+
+                        
+                    elif var=="LIKE":
+                        condition_value.config(state="normal")
+                        condition_value.delete(0, END)
+                        add_placeholder_to(condition_value, '% value %')
+                        
+                        
+                        
+                    elif var=="IS NULL" or var=="IS NOT NULL":
+                        condition_value.delete(0, END)
+                        condition_value.config(state="disabled")
+                
+                    elif var!="IS NULL" or var!="IS NOT NULL":
+                        condition_value.config(state="normal")
+                    
+                    elif var!="BETWEEN" and var!="IN" and var!="LIKE":
+                        condition_value.delete(0, END)
                         
                 
                 operator= ttk.Combobox(Frame2Nb2,values=["=","!=",">","<",">=","<=",'IN',"BETWEEN","LIKE","IS NULL","IS NOT NULL"],width=12)
                 list_operators.append(operator)
                 operator.grid(row=j,column=1,padx=15 ,pady=30)
-                operator.bind("<<ComboboxSelected>>", take)
+                operator.bind("<<ComboboxSelected>>", add_hint2)
 
                 
 
@@ -1279,22 +1299,41 @@ class Toplevel1:
             def requete():
                 global txt
 
-                
-                
+                for nb in range (0,len(list_operated)):
+                    if list_operated[nb].get():
+                        show_condition=True
+                        break
+                    else :
+                        show_condition=False
+
              
                     
                 requete='MERGE INTO '+select2+ '\n' +'USING (SELECT *'
  
-                requete=requete+'\n'+'    FROM ' +select +'\n'+'\n'+'    WHERE '
-
-                for i in range (0,len(list_operated)):
-                    if list_operators[i].get()=="LIKE":
-                        requete=requete+list_operated[i].get()+' '+list_operators[i].get()+' '+'"%'+list_condition_values[i].get()+'%"'+''+'\n'+'    AND ' 
-                    else :
-                        requete=requete+list_operated[i].get()+' '+list_operators[i].get()+' '+'"'+list_condition_values[i].get()+'"'+''+'\n'+'    AND '
-                            
-                requete=requete[:len(requete)-4]
+                requete=requete+'\n'+'    FROM ' +select +'\n'+'\n'
+                
+                if show_condition==True :
                     
+                    requete=requete+'    WHERE '
+    
+                    for i in range (0,len(list_operated)):
+                        
+                        if list_operated[i].get() and list_operators[i].get()!="IS NULL" and list_operators[i].get()!="IS NOT NULL":
+                            requete=requete+list_operated[i].get()+' '+list_operators[i].get()+' '+'"'+list_condition_values[i].get()+'"'
+                            
+                            requete=requete+'\n'+'    AND '
+                        
+                        if list_operated[i].get() and list_operators[i].get()=="IS NULL" or list_operators[i].get()=="IS NOT NULL":
+                            requete=requete+list_operated[i].get()+' '+list_operators[i].get()
+                            
+                            requete=requete+'\n'+'    AND '
+                             
+                                
+                             
+                    requete=requete[:len(requete)-4]
+                    
+                        
+                   
                 requete=requete+') PCC'
                     
                 requete=requete+'\n'+'\n'+'ON ( '
@@ -1308,10 +1347,12 @@ class Toplevel1:
                 requete=requete+')'
                     
                 requete=requete+'\n'+'\n'+'WHEN MATCHED THEN'
+                
                 for i in range (0,len(list_match_dest)):
-                    requete=requete+'\n'+list_operators_match[i].get()+" " +list_match_dest[i].get()+' = ( PCC.'+list_match_src[i].get()
+                    if list_match_src[i].get():
+                        requete=requete+'\n'+list_operators_match[i].get()+" " +list_match_dest[i].get()+' = ( PCC.'+list_match_src[i].get()+' )'
                     
-                requete=requete+' )'
+               
                     
                 requete=requete+'\n'+'WHEN NOT MATCHED THEN'
                     
@@ -1336,8 +1377,10 @@ class Toplevel1:
                 
                     
                     
-            
-                    
+
+
+                        
+      
                     
             def text():
                 
@@ -1346,8 +1389,58 @@ class Toplevel1:
                 file.close   
             
             def generate():
-                if list_entry_from[0].get()!="" : 
+                
+                for l in range (0,len(list_entry_from)) :
+                    if  (list_entry_from[l].get())!="" and (list_entry_to[l].get())!="" :
+                        check_mapping=True
+                    else :
+                        check_mapping=False 
+                        tkinter.messagebox.showinfo("Mapping"," Entries musn't be empty ") 
+                
+                for m in range (0,len(list_operated)) :
                     
+                    if list_condition_values[m].get()=='[min : max]' or list_condition_values[m].get()=='( value )' or list_condition_values[m].get()=='% value %' :
+                        list_condition_values[m].delete(0,END)
+                        
+                    
+                    if list_operated[m].get() and list_operators[m].get() and list_condition_values[m].get() :
+                        check_condition=True
+                        
+                    elif list_operated[m].get()=="" and list_operators[m].get()=="" and list_condition_values[m].get()=="" :
+                        check_condition=True
+                        
+                    elif list_operated[m].get() and list_operators[m].get()=="IS NULL"   and list_condition_values[m].get()=="" :
+                        check_condition=True
+                    
+                    elif list_operated[m].get() and list_operators[m].get()=="IS NOT NULL"  and list_condition_values[m].get()=="" :
+                        check_condition=True
+                    
+                    else:
+                        check_condition=False
+                        tkinter.messagebox.showinfo("Conditions"," Empty Space(s) ") 
+                    
+                        break
+                
+                if list_operators_match[0].get() and list_match_src[0].get() and list_match_dest[0].get() :
+                    check_matching=True
+                else : 
+                    check_matching=False
+                    tkinter.messagebox.showinfo("Matching"," Please fill the empty space(s) ")
+                for n in range (1,len(list_match_src)):
+                    
+                    if list_operators_match[n].get() and list_match_src[n].get() and list_match_dest[n].get() :
+                        check_matching=True
+                    
+                    elif list_operators_match[n].get()=="" and list_match_src[n].get()=="" and list_match_dest[n].get()=="" :
+                        check_matching=True
+                    
+                    else : 
+                        check_matching=False
+                        tkinter.messagebox.showinfo("Matching"," Please fill the empty space(s) ")
+                        break
+                
+                if  check_mapping==True and check_condition==True and check_matching==True :  
+                     
                     top3 = Toplevel()
                     '''This class configures and populates the toplevel window.
                        top is the toplevel containing window.'''
@@ -1391,8 +1484,7 @@ class Toplevel1:
                     save_button.place(relx=0.4, rely=0.92, height=40,width=100)
                     save_button.configure(command=text)
 
-                else :
-                    tkinter.messagebox.showinfo("Error"," At least one item from each side must be selected ")
+                    
                         
 
                 
