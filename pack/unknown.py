@@ -1,3 +1,4 @@
+#mehdi
 #! /usr/bin/env python
 #  -*- coding: utf-8 -*-
 #
@@ -22,9 +23,9 @@ from lib2to3.fixer_util import String
 from lib2to3.pgen2.token import OP
 import mysql.connector 
 from dns.edns import PADDING
-from pack import connexion
-import pack.champs
-import pack.table
+import connexion
+import champs
+import table
 import tkinter.messagebox
 
 
@@ -44,7 +45,7 @@ except ImportError:
     import tkinter.ttk as ttk
     py3 = True
 
-import pack.unknown_support
+import unknown_support
 import os.path
 
 
@@ -56,7 +57,7 @@ def vp_start_gui():
     prog_location = os.path.split(prog_call)[0]
     root = tk.Tk()
     top1 = Toplevel1 (root)
-    pack.unknown_support.init(root, top1)
+    unknown_support.init(root, top1)
     root.mainloop()
 
 w = None
@@ -73,7 +74,7 @@ def create_Toplevel1(rt, *args, **kwargs):
     top1 = Toplevel1 (w)
     
     
-    pack.unknown_support.init(w, top1, *args, **kwargs)
+    unknown_support.init(w, top1, *args, **kwargs)
     return (w, top1)
   
 
@@ -106,7 +107,7 @@ class Toplevel1:
         top1.maxsize(1924, 1061)
         top1.resizable(0, 0)
         top1.title("NX generator app")
-        top1.iconbitmap(r"C:\mehdi\nx.ico")
+        top1.iconbitmap(r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\nx.ico")
         top1.configure(background="#ffffff")
     
                                             #label de la premiere page
@@ -116,7 +117,7 @@ class Toplevel1:
         Label1.configure(background="#232323")
         Label1.configure(disabledforeground="#a3a3a3")
         Label1.configure(foreground="#000000")
-        photo_location = os.path.join(prog_location,r"C:\mehdi\90.png")
+        photo_location = os.path.join(prog_location,r"mehdi\90.png")
         global _img0
         _img0 = tk.PhotoImage(file=photo_location)
         Label1.configure(image=_img0)
@@ -127,7 +128,7 @@ class Toplevel1:
         Labelx.configure(background="#232323")
         Labelx.configure(disabledforeground="#a3a3a3")
         Labelx.configure(foreground="#000000")
-        photo_location = os.path.join(prog_location,r"C:\mehdi\90.png")
+        photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\90.png")
 
         _img0 = tk.PhotoImage(file=photo_location)
         Labelx.configure(image=_img0)
@@ -427,7 +428,7 @@ class Toplevel1:
                 Label3.configure(background="#ffffff")
                 Label3.configure(disabledforeground="#a3a3a3")
                 Label3.configure(foreground="#000000")
-                photo_location = os.path.join(prog_location,r"C:\mehdi\about7.png")
+                photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\about7.png")
                 global _imgx
                 _imgx = tk.PhotoImage(file=photo_location)
                 Label3.configure(image=_imgx)
@@ -459,7 +460,7 @@ class Toplevel1:
             Label1.configure(background="#ffffff")
             Label1.configure(disabledforeground="#a3a3a3")
             Label1.configure(foreground="#000000")
-            photo_location = os.path.join(prog_location,r"C:\mehdi\v52.png")
+            photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\v52.png")
             global _img1
             _img1 = tk.PhotoImage(file=photo_location)
             Label1.configure(image=_img1)
@@ -512,7 +513,7 @@ class Toplevel1:
             TNotebook1.configure(takefocus="")
             
             
-            photo_location = os.path.join(prog_location,r"C:\mehdi\mapping.png")
+            photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\mapping.png")
             global _img14
             _img14 = tk.PhotoImage(file=photo_location)
             TNotebook1_t1 = tk.Frame(TNotebook1)
@@ -522,7 +523,7 @@ class Toplevel1:
             TNotebook1_t1.configure(highlightbackground="#ffffff")
             TNotebook1_t1.configure(highlightcolor="black")
             
-            photo_location = os.path.join(prog_location,r"C:\mehdi\condition.png")
+            photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\condition.png")
             global _img15
             _img15 = tk.PhotoImage(file=photo_location)
             TNotebook1_t2 = tk.Frame(TNotebook1)
@@ -532,7 +533,7 @@ class Toplevel1:
             TNotebook1_t2.configure(highlightbackground="#ffffff")
             TNotebook1_t2.configure(highlightcolor="black")
             
-            photo_location = os.path.join(prog_location,r"C:\mehdi\matching.png")
+            photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\matching.png")
             global _img13
             _img13 = tk.PhotoImage(file=photo_location)
             TNotebook1_t3 = ttk.Notebook(TNotebook1)
@@ -728,9 +729,9 @@ class Toplevel1:
                 
             
             
-            mytable=pack.table.tables ("",host_1,user_1, pass_1,database_1)
+            mytable=table.tables ("",host_1,user_1, pass_1,database_1)
             
-            mytable2=pack.table.tables ("",host_2,user_2, pass_2,database_2)
+            mytable2=table.tables ("",host_2,user_2, pass_2,database_2)
           
           
                                                     # afficher les nom des champs des tables selectionnées de la 1ere base
@@ -1221,7 +1222,7 @@ class Toplevel1:
                 f=f+1       
                 
                 
-            photo_location = os.path.join(prog_location,r"C:\mehdi\add.png")
+            photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\add.png")
             global _img1a
             _img1a = tk.PhotoImage(file=photo_location)    
                 
@@ -1477,7 +1478,7 @@ class Toplevel1:
                     Text1.configure(wrap="word")  
                     Text1.insert(INSERT, requete())
                     
-                    photo_location = os.path.join(prog_location,r"C:\mehdi\save.png")
+                    photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\save.png")
                     global _img12
                     _img12 = tk.PhotoImage(file=photo_location)
                     save_button = Button(Frame1, text = '  Save',image=_img12,compound="left")
@@ -1492,7 +1493,7 @@ class Toplevel1:
             
              
              
-            photo_location = os.path.join(prog_location,r"C:\mehdi\tik3.png")
+            photo_location = os.path.join(prog_location,r"C:\Users\mehdi\Documents\GitHub\NeoXam\pack\mehdi\tik3.png")
             global _img11
             _img11 = tk.PhotoImage(file=photo_location)
             Button2 = Button(FrameButton, text = '  Generate',image=_img11,compound="left")
